@@ -6,13 +6,13 @@
 #    By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 08:59:19 by samjaabo          #+#    #+#              #
-#    Updated: 2023/06/04 03:25:09 by moouaamm         ###   ########.fr        #
+#    Updated: 2023/06/04 18:02:09 by moouaamm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = objs/program.a
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -fsanitize=address # -Wall -Wextra -Werror
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 
 # directory variables

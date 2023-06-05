@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:06:58 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/04 03:27:04 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/05 02:06:40 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,14 @@
 #include <math.h>
 
 #define PI 3.14159265359
-
+#define ONE_COLOR 0x2baced
+#define ZERO_COLOR 0xffffff
+#define SPACE_COLOR 0xd671f0
+#define PLAYER_COLOR 0xff0000
+#define PADDING 1
+#define SIZE 50
+#define PLAYER_SIZE 3
+#define RAY_SIZE 40
 
 //=======player struct=====
 
@@ -43,7 +50,7 @@ typedef struct s_player
 {
 	int		x;
 	int		y;
-	int		turnDirection;
+	int		trnDir;
 	int		walkDirection;
 	double	rotationAngle;
 	int		moveSpeed;
@@ -54,8 +61,10 @@ typedef struct s_player
 
 
 typedef struct widget_s {
+	int		mv_x;
+	int		mv_y;
 	char	**map;
-	void	*self;
+	void	*mlx;
 	void	*window;
 	void	*ground_img;
 	void	*wall_img;
@@ -67,6 +76,8 @@ typedef struct widget_s {
 	int		row;
 	int		col;
 	int		size;
+	int		a;
+	int		b;
 	t_palyer	*player;
 }			t_widget;
 

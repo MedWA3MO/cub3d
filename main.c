@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:56:11 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/04 03:40:02 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/05 06:40:40 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,32 @@ void	ft_leaks(void)
 	//system("cd objs && leaks program");
 }
 
+int	what_direction(t_palyer *player, char c)
+{
+	if (c == 'S')
+	{
+		player->rotationAngle = PI / 2;
+		return (1);
+	}
+	else if(c  == 'N')
+	{
+		player->rotationAngle = PI + (PI / 2);
+		return (1);
+	}
+	else if(c  == 'E')
+	{
+		player->rotationAngle = PI;
+		return (1);
+	}
+	else if(c  == 'W')
+	{
+		player->rotationAngle = 0;
+		return (1);
+	}
+	else
+		return (0);
+}
+
 void 	ft_initPlayer(t_palyer *player, char **map)
 {
 	int i;
@@ -43,25 +69,24 @@ void 	ft_initPlayer(t_palyer *player, char **map)
 		j= 0;
 		while (map[i][j])
 		{
-			if (map[i][j]== 'N' || map[i][j] == 'S'
-				||map[i][j] == 'W' || map[i][j] == 'E')
-				{
-					k= -1;
-					break;
-				}
+			if (what_direction(player, map[i][j]))
+			{
+				k= -1;
+				break;
+			}
 			j++;
 		}
 		if (k == -1)
 			break;
 		i++;
 	}
-	player->x = i;
-	player->y = j;
-	player->turnDirection = 0; // -1 left, 1 right
-	player->walkDirection = 0; // -1 back , 1 front
-	player->rotationAngle = PI;
-	player->moveSpeed = 2;
-	player->rotationSpeed = 2 * (PI / 180);
+	player->x = (j + 1) * SIZE - (SIZE / 2);
+	player->y = (i + 1) * SIZE - (SIZE / 2);
+	player->trnDir = 0;
+	player->walkDirection = 0;
+	// player->rotationAngle = PI;
+	player->moveSpeed = 10;
+	player->rotationSpeed = 10 * (PI / 180);
 }
 
 
