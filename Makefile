@@ -6,7 +6,7 @@
 #    By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 08:59:19 by samjaabo          #+#    #+#              #
-#    Updated: 2023/06/04 18:02:09 by moouaamm         ###   ########.fr        #
+#    Updated: 2023/06/06 03:52:30 by moouaamm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ MLXFLAGS = -lmlx -framework OpenGL -framework AppKit -lm
 LIBFT_DIR = ./libft/
 OBJS_DIR = ./objs/
 
-MAIN_SRC = main.c utils.c get_next_line_utils.c get_next_line.c map.c mlx_widget.c
+MAIN_SRC = main.c utils.c get_next_line_utils.c get_next_line.c map.c mlx_widget.c ray_casting.c
 #src files
 LIBFT_FILES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 		ft_isprint.c ft_toupper.c ft_tolower.c ft_memset.c \

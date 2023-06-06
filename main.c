@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:56:11 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/05 06:40:40 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/05 16:40:29 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_leaks(void)
 	//system("cd objs && leaks program");
 }
 
-int	what_direction(t_palyer *player, char c)
+int	nami(t_palyer *player, char c)
 {
 	if (c == 'S')
 	{
@@ -69,7 +69,7 @@ void 	ft_initPlayer(t_palyer *player, char **map)
 		j= 0;
 		while (map[i][j])
 		{
-			if (what_direction(player, map[i][j]))
+			if (nami(player, map[i][j]))
 			{
 				k= -1;
 				break;

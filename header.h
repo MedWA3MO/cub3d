@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:06:58 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/05 02:06:40 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/06 03:14:11 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 #include <math.h>
 
 #define PI 3.14159265359
+#define YELLOW 0xFFFF00
+#define STRP_THICK 1
+#define FOV 60 * PI / 180 // 80 degree is choosed to be my field of view.
+#define NUM_RAYS 1200 / STRP_THICK // resolution 320 x 200 (width x hight of my window)
 #define ONE_COLOR 0x2baced
 #define ZERO_COLOR 0xffffff
 #define SPACE_COLOR 0xd671f0
@@ -43,6 +47,25 @@
 #define SIZE 50
 #define PLAYER_SIZE 3
 #define RAY_SIZE 40
+
+
+// ========== Point ====
+
+typedef struct s_point
+{
+	int x;
+	int y;
+}t_point;
+
+
+// ======== ray struct ====
+
+typedef struct  s_ray
+{
+	double	ray_angle;
+	int		down;
+	int		right;
+}t_ray;
 
 //=======player struct=====
 
@@ -79,6 +102,7 @@ typedef struct widget_s {
 	int		a;
 	int		b;
 	t_palyer	*player;
+	t_ray		*ray;
 }			t_widget;
 
 enum e_constant
@@ -139,7 +163,7 @@ void		ft_exit(t_parsing *data, char *err);
 void		ft_exit_invalid_data(t_parsing *data, int line);
 
 int	ft_update(int key, t_widget *w);
-void	__init__(t_widget *widget, char **map, t_palyer *player);
+void	__init__(t_widget *widget, char **map, t_palyer *player, t_ray *ray);
 
 //map.c
 int			ft_count_cols(char **map);
@@ -149,4 +173,10 @@ void		ft_read_real_map(t_parsing *data);
 
 //==========mlx=====
 void	ft_run_widget(t_parsing *data, t_palyer *player);
+void ft_draw_line(t_widget *w, int x1, int y1, int x2, int y2, int color);
+
+//============= ray casting
+void	ft_cast_rays(t_widget *w);
+int	there_is_wall(t_widget *w, int x, int y);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 12:48:01 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/05 06:21:42 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/06 04:07:45 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	ft_player(t_widget *w, int x, int y, int color)
 		++col;
 	}
 }
+	//this function is from chatGPT
 
 void ft_draw_line(t_widget *w, int x1, int y1, int x2, int y2, int color)
 {
-	//this function is from chatGPT
 	int dx = x2 - x1;
 	int dy = y2 - y1;
 	int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
@@ -110,9 +110,11 @@ static void	mlx_show_widget(t_widget *w)
 	ft_draw_line(w, w->player->x , w->player->y ,(w->player->x) + (cos(w->player->rotationAngle) * RAY_SIZE) ,
 		(w->player->y) + (sin(w->player->rotationAngle) * RAY_SIZE), PLAYER_COLOR);
 	ft_player(w, w->player->x , w->player->y, PLAYER_COLOR);
+	ft_cast_rays(w);
+	// printf("%f\n",w->ray * 180 / PI);
 }
 
-void	__init__(t_widget *widget, char **map, t_palyer *player)
+void	__init__(t_widget *widget, char **map, t_palyer *player, t_ray *ray)
 {
 	int	tmp;
 
@@ -138,11 +140,12 @@ void	__init__(t_widget *widget, char **map, t_palyer *player)
 	widget->window = mlx_new_window(widget->mlx, widget->cols * SIZE,
 			widget->rows * SIZE, "so_long");
 	widget->player = player;
+	widget->ray = ray;
 	// ft_is_not_null(widget);
 	mlx_show_widget(widget);
 }
 
-int	ft_update2(int key, t_widget *w)
+int	ft_update2(t_widget *w)
 {
 	int moves;
 
@@ -152,7 +155,7 @@ int	ft_update2(int key, t_widget *w)
 
 }
 
-int	thre_isnt_wall(t_widget *w, int x, int y)
+int	there_is_wall(t_widget *w, int x, int y)
 {
 	double	pos_x;
 	double	pos_y;
@@ -162,10 +165,10 @@ int	thre_isnt_wall(t_widget *w, int x, int y)
 	a = floor( (w->player->x + x) / SIZE);
 	b = floor((w->player->y + y) / SIZE);
 	if(a < 0 || a > w->cols || b < 0 || b > w->rows)
-		return (0);
+		return (1);
 	else if (w->map[b][a] == '1')
-		return(0);
-	return(1);
+		return(1);
+	return(0);
 }
 
 int	ft_update(int key, t_widget *w)
@@ -192,7 +195,7 @@ int	ft_update(int key, t_widget *w)
 	int a,b;
 	a = moves * cos(w->player->rotationAngle);
 	b = moves * sin(w->player->rotationAngle);
-	if (thre_isnt_wall(w, a, b))
+	if (!there_is_wall(w, a, b))
 	{
 		w->mv_x = moves * cos(w->player->rotationAngle);
 		w->mv_y = moves * sin(w->player->rotationAngle);
@@ -210,16 +213,23 @@ int	ft_update(int key, t_widget *w)
 // 	return (0);
 // }
 
+void	_init_ray(t_widget *w, t_ray *ray)
+{
+	ray->ray_angle = w->player->rotationAngle - (FOV / 2) ;//- (PI / 2)
+}
+
 void	ft_run_widget(t_parsing *data, t_palyer *player)
 {
 	t_widget	widget;
+	t_ray		ray;
 
 	// ft_is_true_args(argc, argv);
-	__init__(&widget, data->map, player);
+	// _init_ray(&widget, &ray);
+	__init__(&widget, data->map, player, &ray);
 	// mlx_hook(widget.window, ON_KEYDOWN, USELESS, ft_exec_move, &widget);
 	// mlx_hook(widget.window, ON_DESTROY, USELESS, ft_destroy, data);
-	mlx_hook(widget.window, 2, 0, ft_update, &widget);
 	// mlx_loop_hook(widget.mlx, ft_update2, &widget);
+	mlx_hook(widget.window, 2, 0, ft_update, &widget);
 	// mlx_hook(widget.window, 3, 0, ft_update2, &widget);
 	mlx_loop(widget.mlx);
 }
