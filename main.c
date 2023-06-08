@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:56:11 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/05 16:40:29 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/07 09:44:35 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,13 @@ void 	ft_initPlayer(t_palyer *player, char **map)
 int main(int ac, char **av)
 {
 	t_parsing *data;
-	t_palyer player;
+	t_palyer *player;
 
 	// atexit(ft_leaks);
-	// player = NULL;
+	player = NULL;
+	player = malloc (sizeof(t_palyer));
+	if(!player)
+		printf("player allocation\n");
 	ft_parsing(ac, av);
 	data = ft_read_map(av[1]);
 	ft_extract_data(data);
@@ -109,8 +112,8 @@ int main(int ac, char **av)
 	// printf("roof = %s %d\n", data->roof, data->iroof);
 	// printf("map len = %d\n", data->index);
 	// ft_printar(data->map);
-	ft_initPlayer(&player, data->map);
+	ft_initPlayer(player, data->map);
 	// printf("%d %d %d %d\n", player.x, player.y , player.moveSpeed, player.walkDirection);
-	ft_run_widget(data, &player);
+	ft_run_widget(data, player);
 	return (0);
 }

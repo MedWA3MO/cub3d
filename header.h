@@ -6,7 +6,7 @@
 /*   By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:06:58 by samjaabo          #+#    #+#             */
-/*   Updated: 2023/06/06 03:14:11 by moouaamm         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:36:40 by moouaamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 #include <math.h>
 
 #define PI 3.14159265359
-#define YELLOW 0xFFFF00
+#define YELLOW 0x000000
 #define STRP_THICK 1
 #define FOV 60 * PI / 180 // 80 degree is choosed to be my field of view.
 #define NUM_RAYS 1200 / STRP_THICK // resolution 320 x 200 (width x hight of my window)
@@ -62,7 +62,7 @@ typedef struct s_point
 
 typedef struct  s_ray
 {
-	double	ray_angle;
+	// double	ray_angle;
 	int		down;
 	int		right;
 }t_ray;
@@ -178,5 +178,6 @@ void ft_draw_line(t_widget *w, int x1, int y1, int x2, int y2, int color);
 //============= ray casting
 void	ft_cast_rays(t_widget *w);
 int	there_is_wall(t_widget *w, int x, int y);
+double protect_angle(t_ray *ray, double angle);
 
 #endif

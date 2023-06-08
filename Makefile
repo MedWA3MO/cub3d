@@ -6,7 +6,7 @@
 #    By: moouaamm <moouaamm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 08:59:19 by samjaabo          #+#    #+#              #
-#    Updated: 2023/06/06 03:52:30 by moouaamm         ###   ########.fr        #
+#    Updated: 2023/06/07 07:27:06 by moouaamm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,4 +60,4 @@ objs/%.o: %.c header.h ./libft/libft.h
 
 run:
 	@#clear
-	@objs/program maps/map3.cub
+	@objs/program maps/map1.cub
